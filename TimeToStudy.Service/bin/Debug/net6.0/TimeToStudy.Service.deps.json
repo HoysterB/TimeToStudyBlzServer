@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "TimeToStudy.Service/1.0.0": {
+        "dependencies": {
+          "TimeToStudy.Domain": "1.0.0"
+        },
+        "runtime": {
+          "TimeToStudy.Service.dll": {}
+        }
+      },
+      "TimeToStudy.Domain/1.0.0": {
+        "runtime": {
+          "TimeToStudy.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TimeToStudy.Service/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TimeToStudy.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

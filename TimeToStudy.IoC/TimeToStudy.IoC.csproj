@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TimeToStudy.Data\TimeToStudy.Data.csproj" />
+    <ProjectReference Include="..\TimeToStudy.Models\TimeToStudy.Domain.csproj" />
+    <ProjectReference Include="..\TimeToStudy.Service\TimeToStudy.Service.csproj" />
+  </ItemGroup>
+
+</Project>

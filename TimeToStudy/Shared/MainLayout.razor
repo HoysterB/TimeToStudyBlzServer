@@ -1,0 +1,72 @@
+﻿@using TimeToStudy.Domain.Entities
+@inherits LayoutComponentBase
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+@inject NavigationManager NavManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+
+<style>
+    .btnPerson {
+        border-radius: 50px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    }
+
+    .button {
+        position: absolute;
+        left: 0;
+    }
+</style>
+
+<PageTitle>TimeToStudy</PageTitle>
+
+<div class="page">
+    @if (collapse)
+    {
+        <div class="sidebar" style="width: 80px;">
+            <NavMenu />
+        </div>
+    }
+
+    <main>
+        <MudAppBar Color="Color.Transparent" Fixed="false" Elevation="5">
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" @onclick="changeCollapse" />
+            <MudSpacer />
+            @if (estudanteLogi != null)
+            {
+                <MudFab Label="@estudanteLogi.Nome" />
+            }
+        </MudAppBar>
+
+        <div class="container-fluid" style="padding: 32px;">
+
+            @Body
+        </div>
+    </main>
+</div>
+@code {
+    private bool collapse = true;
+
+    private void changeCollapse()
+    {
+        collapse = !collapse;
+    }
+
+    public Estudante estudanteLogi = null;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                estudanteLogi = await localStorage.GetItemAsync<Estudante>("EstudanteLogado");
+            }
+            catch (Exception ex)
+            {
+                NavManager.NavigateTo("/");
+            }
+            StateHasChanged();
+        }
+    }
+}

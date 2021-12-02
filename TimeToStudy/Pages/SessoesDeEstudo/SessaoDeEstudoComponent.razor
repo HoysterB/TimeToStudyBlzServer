@@ -1,0 +1,50 @@
+﻿@page "/SessaoDeEstudo"
+
+<MudText Align="Align.Left" Typo="Typo.h6">Sessão de estudos</MudText>
+
+
+<MudCard>
+    <MudCardContent>
+        <MudText Align="Align.Center" Typo="Typo.h6">Nova sessão de estudos</MudText>
+        <MudButton Variant="Variant.Text" Color="Color.Primary" @onclick="changeSession">Nova sessão</MudButton>
+
+        @if (showSession)
+        {
+            <div style="border:none;">
+                <div style="height: 200px; width: 200px; border-radius: 50%; border: none; margin: 32px auto; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+         
+                </div>
+
+
+            </div>
+            <MudCardActions>
+
+                <div style="margin: 32px auto;">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary">Iniciar sessão</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Secondary">Parar sessão</MudButton>
+                </div>
+
+
+            </MudCardActions>
+        }
+        @if (!showSession)
+        {
+            <div style="margin: 0 auto;">
+                <img src="assets/estudante.png" alt="student" style="margin: 0 auto; width: 800px;"/>
+
+            </div>
+
+        }
+
+    </MudCardContent>
+
+</MudCard>
+
+@code {
+    bool showSession;
+
+    void changeSession()
+    {
+        showSession = !showSession;
+    }
+}

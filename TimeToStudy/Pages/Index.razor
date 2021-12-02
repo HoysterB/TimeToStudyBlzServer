@@ -1,0 +1,136 @@
+﻿@page "/Dashboard"
+@using Microsoft.AspNetCore.Http;
+@using TimeToStudy.Domain.Entities
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject NavigationManager NavManager
+
+@if (estudanteLogi != null)
+{
+
+    <MudCarousel Style="height:600px;" ShowArrows="@arrows" ShowDelimiters="@delimiters" AutoCycle="@autocycle" TData="object">
+        <MudCarouselItem Transition="transition" >
+
+
+
+            <MudPaper Class="pa-4">
+
+                <MudText Align="Align.Left" Typo="Typo.h6">Home</MudText>
+                <MudTimeline>
+                    <MudTimelineItem Color="Color.Info" Size="Size.Small">
+                        <ItemOpposite>
+                            <MudText Color="Color.Info" Typo="Typo.h5">@estudanteLogi.CreateAt.ToString()</MudText>
+                        </ItemOpposite>
+                        <ItemContent>
+                            <MudText Color="Color.Info" Typo="Typo.h6" GutterBottom="true">Parabéns!</MudText>
+                            <MudText><b>Cadastro no sistema! Aqui que seu futuro deslancha.</b></MudText>
+                        </ItemContent>
+                    </MudTimelineItem>
+                    <MudTimelineItem Color="Color.Primary" Size="Size.Small">
+                        <ItemOpposite>
+                            <MudText Color="Color.Primary" Typo="Typo.h5">01/12/2021</MudText>
+                        </ItemOpposite>
+                        <ItemContent>
+                            <MudText Color="Color.Primary" Typo="Typo.h6" GutterBottom="true">Primeira matéria criada!</MudText>
+                            <MudText><b>Criou sua primeira matéria! Vamos lá.</b></MudText>
+                        </ItemContent>
+                    </MudTimelineItem>
+                    <MudTimelineItem Color="Color.Success" Size="Size.Small">
+                        <ItemOpposite>
+                            <MudText Color="Color.Success" Typo="Typo.h5">1977</MudText>
+                        </ItemOpposite>
+                        <ItemContent>
+                            <MudText Color="Color.Success" Typo="Typo.h6" GutterBottom="true">Primeira sessão de estudos</MudText>
+                            <MudText><b>Realização da primeira sessão de estudos! Parabéns @estudanteLogi.Nome</b></MudText>
+                        </ItemContent>
+                    </MudTimelineItem>
+                </MudTimeline>
+
+            </MudPaper>
+
+
+
+        </MudCarouselItem>
+        <MudCarouselItem Transition="transition" >
+
+
+
+            <MudPaper Class="pa-4">
+                <MudChart ChartType="ChartType.Pie" InputData="@data" @bind-SelectedIndex="Index2" InputLabels="@labels" Width="300px" Height="300px" />
+            </MudPaper>
+
+        </MudCarouselItem>
+
+    </MudCarousel>
+
+
+}
+
+
+@code {
+
+    private bool arrows = true;
+    private bool delimiters = true;
+    private bool autocycle = true;
+    private Transition transition = Transition.None;
+
+    bool defaultChart = true;
+
+    private int IndexChange = -1;
+
+    Random random = new Random();
+    public Estudante estudanteLogi = null;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                estudanteLogi = await localStorage.GetItemAsync<Estudante>("EstudanteLogado");
+            }
+            catch (Exception ex)
+            {
+                NavManager.NavigateTo("/");
+            }
+            StateHasChanged();
+        }
+    }
+
+    private int Index2 = -1; //default value cannot be 0 -> first selectedindex is 0.
+    int dataSize = 4;
+    double[] data = { 77, 25, 20, 5 };
+    string[] labels = { "Uranium", "Plutonium", "Thorium", "Caesium", "Technetium", "Promethium",
+                        "Polonium", "Astatine", "Radon", "Francium", "Radium", "Actinium", "Protactinium",
+                        "Neptunium", "Americium", "Curium", "Berkelium", "Californium", "Einsteinium", "Mudblaznium" };
+
+
+    void RandomizeData()
+    {
+        var new_data = new double[dataSize];
+        for (int i = 0; i < new_data.Length; i++)
+            new_data[i] = random.NextDouble() * 100;
+        data = new_data;
+        StateHasChanged();
+    }
+
+    void AddDataSize()
+    {
+        if (dataSize < 20)
+        {
+            dataSize = dataSize + 1;
+            RandomizeData();
+        }
+    }
+    void RemoveDataSize()
+    {
+        if (dataSize > 0)
+        {
+            dataSize = dataSize - 1;
+            RandomizeData();
+        }
+    }
+
+
+}
+
+

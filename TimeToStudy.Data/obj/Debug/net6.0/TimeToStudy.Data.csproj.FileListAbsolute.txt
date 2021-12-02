@@ -1,0 +1,17 @@
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Data\bin\Debug\net6.0\TimeToStudy.Data.deps.json
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Data\bin\Debug\net6.0\TimeToStudy.Data.runtimeconfig.json
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Data\bin\Debug\net6.0\TimeToStudy.Data.dll
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Data\bin\Debug\net6.0\ref\TimeToStudy.Data.dll
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Data\bin\Debug\net6.0\TimeToStudy.Data.pdb
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Data\bin\Debug\net6.0\TimeToStudy.Domain.dll
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Data\bin\Debug\net6.0\TimeToStudy.Domain.pdb
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Data\obj\Debug\net6.0\TimeToStudy.Data.csproj.AssemblyReference.cache
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Data\obj\Debug\net6.0\TimeToStudy.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Data\obj\Debug\net6.0\TimeToStudy.Data.AssemblyInfoInputs.cache
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Data\obj\Debug\net6.0\TimeToStudy.Data.AssemblyInfo.cs
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Data\obj\Debug\net6.0\TimeToStudy.Data.csproj.CoreCompileInputs.cache
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Data\obj\Debug\net6.0\TimeToStudy.Data.csproj.CopyComplete
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Data\obj\Debug\net6.0\TimeToStudy.Data.dll
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Data\obj\Debug\net6.0\ref\TimeToStudy.Data.dll
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Data\obj\Debug\net6.0\TimeToStudy.Data.pdb
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Data\obj\Debug\net6.0\TimeToStudy.Data.genruntimeconfig.cache

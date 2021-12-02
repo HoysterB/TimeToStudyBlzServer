@@ -1,0 +1,243 @@
+﻿@page "/Materia"
+@using _Ent = TimeToStudy.Domain.Entities
+@using TimeToStudy.Domain.Interfaces.Services.Estudante
+@using TimeToStudy.Domain.Interfaces.Services.Materia
+@inject NavigationManager NavManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IEstudanteService _estudanteService;
+@inject IMateriaService _materiaService;
+<style>
+    .title {
+        margin: 16px 0 16px 32px;
+    }
+
+
+
+    .btn {
+        border-radius: 0;
+    }
+
+    .btn-success {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        border-radius: 30px;
+    }
+
+    .text-gray-800 {
+        color: #3f4254 !important;
+    }
+
+    .text-hover-primary {
+        transition: color .2s ease,background-color .2s ease;
+    }
+
+    .fw-bolder {
+        font-weight: 600 !important;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .fs-6 {
+        font-size: 1.075rem !important;
+    }
+
+    .badge-light-success {
+        color: #50cd89;
+        background-color: #e8fff3;
+        border: none;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 0.5em 0.85em;
+        font-weight: 600;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 0.475rem;
+        width: 150px;
+        position: absolute;
+        right: 0;
+        margin-right: 25px;
+    }
+
+    .fs-8 {
+        font-size: .85rem !important;
+    }
+
+    .flex-grow-1 {
+        flex-grow: 1 !important;
+    }
+
+    label {
+        margin-left: 20px;
+    }
+
+</style>
+                <MudText Align="Align.Left" Typo="Typo.h6">Matérias </MudText>
+
+
+<div class="row cardContainer">
+    <div class="card col-6">
+
+        <div class="card-body">
+            <div class="row">
+                
+                <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-light col-1" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; border: 1px solid whitesmoke;">
+                    <i class="oi oi-plus"></i>
+                </button>
+            </div>
+
+
+            <hr />
+
+
+            @*@foreach (var materia in Materias)
+            {*@
+
+                <div class="row mt-3 flex-grow-1">
+                    <div>
+                        <a href="" class="text-gray-800 text-hover-primary fw-bolder fs-6">Nome matéria</a>
+                    </div>
+                    <button class="badge badge-light-success fs-8 fw-bolder" @onclick="showDetalhes">
+                        Detalhes
+                    </button>
+                </div>
+@*
+            }*@
+
+
+            <hr />
+
+        </div>
+    </div>
+
+    <div class="col-6">
+
+        @if (!detalheMateria)
+        {
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <b>
+                            Nome Matéria
+                        </b>
+                    </div>
+
+                    <hr />
+
+                    <div class="card-title">
+                        <b>
+                            Conteúdos
+                        </b>
+                    </div>
+
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    Conteúdo
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">Descrição</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="background-color: white;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Adicionar Matéria</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Nome da matéria" @bind="materia.Nome">
+                    <label for="floatingInput">Nome</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Conteúdo">
+                    <label for="floatingInput">Conteúdo</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Voltar</button>
+                <button type="button" class="btn btn-outline-success" @onclick="() => CriarMateria()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    private bool detalheMateria = true;
+
+    public _Ent.Estudante estudanteLogi = null;
+    _Ent.Materia materia = new _Ent.Materia();
+
+    public List<_Ent.Materia> Materias = new List<_Ent.Materia>();
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+
+        PegaTodasMaterias();
+
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                estudanteLogi = await localStorage.GetItemAsync<_Ent.Estudante>("EstudanteLogado");
+            }
+            catch (Exception ex)
+            {
+                NavManager.NavigateTo("/");
+            }
+            StateHasChanged();
+        }
+    }
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+    private void showDetalhes()
+    {
+        detalheMateria = !detalheMateria;
+    }
+
+    public void PegaTodasMaterias()
+    {
+        Materias = _estudanteService.GetMateriaList(estudanteLogi);
+    }
+
+    private void CriarMateria()
+    {
+        try
+        {
+            materia.EstudanteId = estudanteLogi.Id;
+            _materiaService.InsertAsync(materia);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+
+    }
+
+}

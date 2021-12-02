@@ -1,0 +1,11 @@
+﻿@page "/Agenda"
+
+<MudText Align="Align.Left" Typo="Typo.h6">Agenda</MudText>
+
+<MudHidden Breakpoint="@Breakpoint.Xs">
+    <MudDatePicker PickerVariant="PickerVariant.Static" Orientation="Orientation.Landscape" Date="@(DateTime.Today.AddDays(1))" />
+</MudHidden>
+
+@code {
+
+}

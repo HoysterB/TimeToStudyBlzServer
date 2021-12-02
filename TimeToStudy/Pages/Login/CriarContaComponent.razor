@@ -1,0 +1,98 @@
+﻿@using TimeToStudy.Domain.Entities
+@using TimeToStudy.Domain.Interfaces.Services.Estudante
+@inject IEstudanteService _repo;
+@inject NavigationManager NavManager
+
+<div class="container">
+    <div>
+        <div class="h4 mensagem">
+            Maior sistema de gestão de estudos
+        </div>
+
+        <div class="h4 mensagem2">
+            junte-se a nós
+        </div>
+    </div>
+    <div>
+        <img class="students" src="assets/EstudantesVetor.jpg" alt="students" />
+    </div>
+
+    <div class="loginContainer">
+
+
+        <div class="row">
+            <div class="col-4"></div>
+            <img class="col-4" src="assets/Logo.png" alt="logo" />
+        </div>
+
+        <div class="label-float">
+            <input type="text" placeholder=" " @bind="estudante.Nome" />
+            <label>Nome</label>
+        </div>
+
+        <div class="label-float">
+            <input type="text" placeholder=" " @bind="estudante.Sobrenome" />
+            <label>Sobrenome</label>
+        </div>
+
+        <div class="label-float">
+            <input type="email" placeholder=" " @bind="estudante.Email" />
+            <label>E-mail</label>
+        </div>
+
+        <div class="label-float">
+            <input type="text" placeholder=" " @bind="txtRepEmail" />
+            <label>Repita o E-mail</label>
+        </div>
+
+        <div class="label-float">
+            <input type="password" placeholder=" " @bind="estudante.Senha" />
+            <label>Senha</label>
+        </div>
+
+
+        <div class="label-float">
+            <input type="password" placeholder=" " @bind="txtRepSenha" />
+            <label>Repita a Senha</label>
+        </div>
+
+        <div class="row mt-3">
+            <button class="btn btn-outline-primary" @onclick="() => Cadastrar(estudante)">
+                Cadastrar
+            </button>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <button class="btn btn-primary">
+                Entrar com o Facebook
+            </button>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    Estudante estudante = new Estudante();
+    string txtRepEmail;
+    string txtRepSenha;
+    bool error;
+    bool msg = false;
+
+    public void Cadastrar(Estudante estudante)
+    {
+
+        if (txtRepEmail.ToLower() == estudante.Email.ToLower() && txtRepSenha == estudante.Senha)
+        {
+            var criar = _repo.InsertAsync(estudante);
+            NavManager.NavigateTo(NavManager.Uri, forceLoad: true);
+        }
+        else
+        {
+            bool error = true;
+        }
+
+
+    }
+}

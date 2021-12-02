@@ -1,0 +1,15 @@
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Service\obj\Debug\net6.0\TimeToStudy.Service.csproj.AssemblyReference.cache
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Service\obj\Debug\net6.0\TimeToStudy.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Service\obj\Debug\net6.0\TimeToStudy.Service.AssemblyInfoInputs.cache
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Service\obj\Debug\net6.0\TimeToStudy.Service.AssemblyInfo.cs
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Service\obj\Debug\net6.0\TimeToStudy.Service.csproj.CoreCompileInputs.cache
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Service\bin\Debug\net6.0\TimeToStudy.Service.deps.json
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Service\bin\Debug\net6.0\TimeToStudy.Service.dll
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Service\bin\Debug\net6.0\ref\TimeToStudy.Service.dll
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Service\bin\Debug\net6.0\TimeToStudy.Service.pdb
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Service\bin\Debug\net6.0\TimeToStudy.Domain.dll
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Service\bin\Debug\net6.0\TimeToStudy.Domain.pdb
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Service\obj\Debug\net6.0\TimeToStudy.Service.csproj.CopyComplete
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Service\obj\Debug\net6.0\TimeToStudy.Service.dll
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Service\obj\Debug\net6.0\ref\TimeToStudy.Service.dll
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Service\obj\Debug\net6.0\TimeToStudy.Service.pdb

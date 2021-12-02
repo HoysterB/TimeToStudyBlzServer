@@ -1,0 +1,240 @@
+﻿@page "/"
+@using TimeToStudy.Domain.Entities
+@using TimeToStudy.Domain.Interfaces.Services.Estudante
+@using TimeToStudy.Shared.EmptyLayout
+@layout EmptyLayout
+@inject IEstudanteService _estudanteService;
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject NavigationManager NavManager
+
+<style>
+    .loginContainer {
+        border: none;
+        width: 400px;
+        position: absolute;
+        right: 0;
+        margin-right: 50px;
+        margin-top: 50px;
+        box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+        padding: 16px;
+        padding-top: 56px;
+        padding-bottom: 56px;
+        background-color: white;
+    }
+
+
+    .label-float {
+        position: relative;
+        padding-top: 13px;
+        margin-top: 32px;
+        margin-left: 46px;
+    }
+
+        .label-float input {
+            border: 0;
+            border-bottom: 2px solid lightgrey;
+            outline: none;
+            min-width: 300px;
+            font-size: 16px;
+            transition: all .3s ease-out;
+            -webkit-transition: all .3s ease-out;
+            -moz-transition: all .3s ease-out;
+            -webkit-appearance: none;
+            border-radius: 0;
+        }
+
+            .label-float input:focus {
+                border-bottom: 2px solid #3951b2;
+            }
+
+            .label-float input::placeholder {
+                color: transparent;
+            }
+
+        .label-float label {
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-top: 13px;
+            transition: all .3s ease-out;
+            -webkit-transition: all .3s ease-out;
+            -moz-transition: all .3s ease-out;
+        }
+
+        .label-float input:required:invalid + label {
+            color: red;
+        }
+
+        .label-float input:focus:required:invalid {
+            border-bottom: 2px solid red;
+        }
+
+        .label-float input:required:invalid + label:before {
+            content: '*';
+        }
+
+        .label-float input:focus + label,
+        .label-float input:not(:placeholder-shown) + label {
+            font-size: 13px;
+            margin-top: 0;
+            color: #3951b2;
+        }
+
+    .btn {
+        border-radius: 0;
+        width: 300px;
+        margin-left: 60px;
+    }
+
+    hr {
+        margin-bottom: 32px;
+    }
+
+    .recuperacao {
+        text-align: center;
+        font-size: 12px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+    .students {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 1000px;
+    }
+
+    .mensagem {
+        margin-top: 50px;
+        position: absolute;
+        left: 0;
+        margin-left: 50px;
+        font-weight: 500;
+    }
+
+    .mensagem2 {
+        margin-top: 100px;
+        position: absolute;
+        left: 0;
+        margin-left: 285px;
+    }
+</style>
+
+@if (!CriarConta)
+{
+    <div class="container">
+        <div>
+            <div class="h4 mensagem">
+                Maior sistema de gestão de estudos
+            </div>
+
+            <div class="h4 mensagem2">
+                junte-se a nós
+            </div>
+        </div>
+        <div>
+            <img class="students" src="assets/EstudantesVetor.jpg" alt="students" />
+        </div>
+
+        <div class="loginContainer">
+            <div class="row">
+                <div class="col-4"></div>
+                <img class="col-4" src="assets/Logo.png" alt="logo" />
+            </div>
+
+            <div class="label-float">
+                <input type="text" placeholder=" " @bind="txtLogin" />
+                <label>Login</label>
+            </div>
+
+            <div class="label-float">
+                <input type="password" placeholder=" " @bind="txtSenha" />
+                <label>Senha</label>
+            </div>
+
+            <div class="recuperacao">
+                Esqueceu sua senha? <a href="">Recupere-a</a>
+            </div>
+
+            <div class="row">
+                <button class="btn btn-outline-primary" @onclick="Logar">
+                    Entrar
+                </button>
+            </div>
+
+            <div class="row mt-3">
+                <button class="btn btn-outline-success" @onclick="ChangeCriarConta">
+                    Criar conta
+                </button>
+            </div>
+
+            <hr />
+
+            <div class="row">
+                <button class="btn btn-primary">
+                    Entrar com o Facebook
+                </button>
+            </div>
+
+            @if (erro)
+            {
+                <MudAlert Severity="Severity.Error" Style="margin-top:20px; border: 1px solid red;">Erro ao logar</MudAlert>
+            }
+        </div>
+    </div>
+}
+else if (CriarConta)
+{
+    <CriarContaComponent></CriarContaComponent>
+}
+
+@code {
+    public bool CriarConta = false;
+
+    public string txtLogin;
+    public string txtSenha;
+    public bool erro = false;
+
+
+    private void ChangeCriarConta()
+    {
+        CriarConta = !CriarConta;
+    }
+
+    public void Logar()
+    {
+
+        var estudante = _estudanteService.GetByLogin(txtLogin, txtSenha);
+        if (txtLogin == "" || txtLogin == null || txtSenha == "" || txtSenha == null)
+        {
+            erro = true;
+            return;
+        }
+
+        if (estudante == null)
+        {
+            erro = true;
+            return;
+        }
+
+        if (estudante != null)
+        {
+            try
+            {
+                localStorage.SetItemAsync<Estudante>("EstudanteLogado", (Estudante)estudante);
+                NavManager.NavigateTo("/Dashboard");
+            }
+            catch (Exception ex)
+            {
+                erro = true;
+                return;
+            }
+
+        }
+        else
+        {
+            erro = true;
+        }
+    }
+}

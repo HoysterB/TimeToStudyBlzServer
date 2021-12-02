@@ -1,0 +1,12 @@
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Models\bin\Debug\net6.0\TimeToStudy.Domain.deps.json
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Models\bin\Debug\net6.0\TimeToStudy.Domain.dll
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Models\bin\Debug\net6.0\ref\TimeToStudy.Domain.dll
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Models\bin\Debug\net6.0\TimeToStudy.Domain.pdb
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Models\obj\Debug\net6.0\TimeToStudy.Domain.csproj.AssemblyReference.cache
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Models\obj\Debug\net6.0\TimeToStudy.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Models\obj\Debug\net6.0\TimeToStudy.Domain.AssemblyInfoInputs.cache
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Models\obj\Debug\net6.0\TimeToStudy.Domain.AssemblyInfo.cs
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Models\obj\Debug\net6.0\TimeToStudy.Domain.csproj.CoreCompileInputs.cache
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Models\obj\Debug\net6.0\TimeToStudy.Domain.dll
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Models\obj\Debug\net6.0\ref\TimeToStudy.Domain.dll
+C:\Projects\TimeToStudyBlServer\TimeToStudy.Models\obj\Debug\net6.0\TimeToStudy.Domain.pdb
